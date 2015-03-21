@@ -32,6 +32,7 @@ public class AutonomousTwo extends Command{
 		leftEncoder = leftEnc;
 		rightEncoder = rightEnc;
 	}
+	
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
@@ -43,15 +44,18 @@ public class AutonomousTwo extends Command{
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("left encoder counts", leftEncoder.get());
 	    SmartDashboard.putNumber("right encoder counts", rightEncoder.get());
+	  //moves arm up to grab tote
 	    if(armMove <=15)
 	    {
 	    	manipulate.set(1);
 	    	armMove++;
 	    }
+	  //moves the robot backwards at 80% speed for 97 inches  
 		if(leftEncoder.get()< (encleftinch*97) && rightEncoder.get()< (encrightinch*97) && armMove>=15)
 		{
 			Brodin.tankDrive(.8, .8);
 		}
+	  //stops the robot
 		else
 		{
 			Brodin.tankDrive(0, 0);

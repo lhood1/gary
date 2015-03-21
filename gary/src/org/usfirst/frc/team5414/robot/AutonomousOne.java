@@ -39,13 +39,14 @@ public class AutonomousOne extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-
 		SmartDashboard.putNumber("left encoder counts", leftEncoder.get());
 	    SmartDashboard.putNumber("right encoder counts", rightEncoder.get());
+	  //moves the robot forward at 80% speed for 145 inches  
 		if(leftEncoder.get()< (encleftinch*145) && rightEncoder.get()< (encrightinch*145))
 		{
 			Brodin.tankDrive(-.8, -.8);
 		}
+	    //stops the robot
 		else
 		{
 			Brodin.tankDrive(0, 0);

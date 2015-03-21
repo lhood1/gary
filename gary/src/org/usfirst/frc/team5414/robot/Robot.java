@@ -39,7 +39,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
 	
 	RobotDrive myRobot;
 	Joystick stick;
@@ -131,60 +130,63 @@ public class Robot extends IterativeRobot {
 		auton2 = new AutonomousTwo(driveLeft, driveRight, myRobot, encoderleft, encoderright, manipulator);
 		standardMode = new TeleopOne(driveLeft, driveRight, myRobot, encoderleft, encoderright, stick, LB, RB, pdp, gyro, manipulator);
 		demoMode = new TeleopTwo(driveLeft, driveRight, myRobot, encoderleft, encoderright, stick, LB, RB, pdp, gyro, manipulator);
-   	   
+	
 	}
-
+	
 	/**
 	 * This function is run once each time the robot enters autonomous mode
 	 */
 	public void autonomousInit() {
+	
 		gyro.reset();
 		autoChooser.addDefault("Default program", auton1);
 		autoChooser.addObject("Experimental auto", auton2);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 		autonomousCommand = (Command) autoChooser.getSelected();
 		autonomousCommand.start();
-		
+	
 	}
-
+	
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		
+	
 		Scheduler.getInstance().run();
+	
 	}
-
+	
 	/**
 	 * This function is called once each time the robot enters tele-operated mode
 	 */
 	public void teleopInit(){
-	 	Scheduler.getInstance().removeAll();
+	
+		Scheduler.getInstance().removeAll();
 		demochooser.addDefault("boring drive", demoMode);
 		demochooser.addObject("OVERHYPER DRIVE BETA", standardMode);
 		SmartDashboard.putData("Drive Mode Chooser", demochooser);
 		demoCommand =  (Command)demochooser.getSelected();
 		demoCommand.start();
 		gyro.reset();
-		
+	
 	}
-
+	
 	/**
 	 *
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		
+	
 		Scheduler.getInstance().run();
-		
-
+	
 	}
-
+	
 	/**
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
+	
 		LiveWindow.run();
+	
 	}
-
 }

@@ -54,7 +54,9 @@ public class TeleopOne extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Brodin.arcadeDrive(cont.getRawAxis(1), cont.getRawAxis(5));
+	    //drives the robot	
+		Brodin.tankDrive(cont.getRawAxis(1), cont.getRawAxis(5));
+		//puts #'s on the smart dashboard
 		SmartDashboard.putNumber("front left current", powerDist.getCurrent(15));
 		SmartDashboard.putNumber("front right current", powerDist.getCurrent(1));
 		SmartDashboard.putNumber("back left current", powerDist.getCurrent(14));
@@ -65,14 +67,17 @@ public class TeleopOne extends Command {
 	    SmartDashboard.putNumber("right encoder counts", rightEncoder.get());
 	    SmartDashboard.putNumber("left encoder distance", leftEncoder.getDistance());
 	    SmartDashboard.putNumber("right encoder distance", rightEncoder.getDistance());
-		if(LBump.get())
+		//sets the manipulator to go down when the left bumper is pushed
+	    if(LBump.get())
 		{
 			manipulate.set(-1);
 		}
+	    //sets the manipulator to go up when the right bumper is pushed
 		else if(RBump.get())
 		{
 			manipulate.set(1);
 		}
+		//sets the manipulator to stop when nothing is pushed
 		else
 		{
 			manipulate.set(0);
