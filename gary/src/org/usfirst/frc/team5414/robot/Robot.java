@@ -97,8 +97,7 @@ public class Robot extends IterativeRobot {
 		pdp = new PowerDistributionPanel();
 		potentiometer  = new AnalogPotentiometer(1,2);
 		encoderleft = new Encoder(0, 1, false, EncodingType.k4X);
-		encoderright = new Encoder(2, 3, false, EncodingType.k4X);
-		boolean Aidenissexy = false; 
+		encoderright = new Encoder(2, 3, true, EncodingType.k4X);
 		encoderleft.setDistancePerPulse(1);
 		encoderright.setDistancePerPulse(1);
 		encoderleftinch= 23.7978;
@@ -128,9 +127,9 @@ public class Robot extends IterativeRobot {
    	    gyro.reset();
    	    auton1 = new AutonomousOne(driveLeft, driveRight, myRobot, encoderleft, encoderright);
 		auton2 = new AutonomousTwo(driveLeft, driveRight, myRobot, encoderleft, encoderright, manipulator);
-		standardMode = new TeleopOne(driveLeft, driveRight, myRobot, encoderleft, encoderright, stick, LB, RB, pdp, gyro, manipulator);
-		demoMode = new TeleopTwo(driveLeft, driveRight, myRobot, encoderleft, encoderright, stick, LB, RB, pdp, gyro, manipulator);
-	
+		standardMode = new TeleopOne(driveLeft, driveRight, myRobot, encoderleft, encoderright, stick, LB, RB, aBtn, bBtn, xBtn, yBtn, pdp, gyro, manipulator, DoubleSolenoid1, DoubleSolenoid2);
+		demoMode = new TeleopTwo(driveLeft, driveRight, myRobot, encoderleft, encoderright, stick, LB, RB, aBtn, bBtn, xBtn, yBtn, pdp, gyro, manipulator, DoubleSolenoid1, DoubleSolenoid2);
+		
 	}
 	
 	/**

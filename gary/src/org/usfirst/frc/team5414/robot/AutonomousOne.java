@@ -42,9 +42,9 @@ public class AutonomousOne extends Command {
 		SmartDashboard.putNumber("left encoder counts", leftEncoder.get());
 	    SmartDashboard.putNumber("right encoder counts", rightEncoder.get());
 	  //moves the robot forward at 80% speed for 145 inches  
-		if(leftEncoder.get()< (encleftinch*145) && rightEncoder.get()< (encrightinch*145))
+		if(leftEncoder.get()< ((encleftinch*225)) && rightEncoder.get()< ((encrightinch*225)))
 		{
-			Brodin.tankDrive(-.8, -.8);
+			Brodin.tankDrive(-.6, -.6);
 		}
 	    //stops the robot
 		else

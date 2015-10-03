@@ -23,13 +23,19 @@ public class TeleopOne extends Command {
 	Joystick cont;
 	JoystickButton LBump;
 	JoystickButton RBump;
+	JoystickButton aBtn;
+	JoystickButton bBtn;
+	JoystickButton xBtn;
+	JoystickButton yBtn;
 	PowerDistributionPanel powerDist;
 	Gyro gyrate;
 	CANTalon manipulate;
+	DoubleSolenoid DoubleSolenoid1;
+	DoubleSolenoid DoubleSolenoid2;
 
 	public TeleopOne(SpeedController leftCon, SpeedController rightCon, RobotDrive drive, Encoder leftEnc,
-			Encoder rightEnc, Joystick controller, JoystickButton LBumper, JoystickButton RBumper, 
-			PowerDistributionPanel power, Gyro gyrator, CANTalon manipulating)
+			Encoder rightEnc, Joystick controller, JoystickButton LBumper, JoystickButton RBumper, JoystickButton a, JoystickButton b, JoystickButton x, JoystickButton y, 
+			PowerDistributionPanel power, Gyro gyrator, CANTalon manipulating, DoubleSolenoid solenoid1, DoubleSolenoid solenoid2)
 	{
 		leftSide = leftCon;
 		rightSide = rightCon;
@@ -42,6 +48,20 @@ public class TeleopOne extends Command {
 		powerDist = power;
 		gyrate = gyrator;
 		manipulate = manipulating;
+		DoubleSolenoid1 = solenoid1;
+		DoubleSolenoid2 = solenoid2;
+		aBtn = a; 
+		bBtn = b;
+		xBtn = x;
+		yBtn = y;
+		
+		manipulate.reverseOutput(true);
+		manipulate.reverseSensor(true);
+		manipulate.enableLimitSwitch(true , true);
+		manipulate.ConfigFwdLimitSwitchNormallyOpen(true);
+		manipulate.ConfigRevLimitSwitchNormallyOpen(true);
+		manipulate.enableControl();
+		
 	}
 	@Override
 	protected void initialize() {
@@ -81,6 +101,28 @@ public class TeleopOne extends Command {
 		else
 		{
 			manipulate.set(0);
+		}
+	    if(aBtn.get())
+		{
+			DoubleSolenoid1.set(DoubleSolenoid.Value.kForward);
+		}
+		else if(bBtn.get())
+		{
+			DoubleSolenoid1.set(DoubleSolenoid.Value.kReverse);
+		}
+		if(xBtn.get())
+		{
+			DoubleSolenoid2.set(DoubleSolenoid.Value.kForward);
+		}
+		else if(yBtn.get())
+		{
+			DoubleSolenoid2.set(DoubleSolenoid.Value.kReverse);
+		}
+		else
+		{
+			DoubleSolenoid1.set(DoubleSolenoid.Value.kOff);
+			DoubleSolenoid2.set(DoubleSolenoid.Value.kOff);
+			// Prints here are not a good idea because they flood the console
 		}
 	}
 

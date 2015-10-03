@@ -22,7 +22,6 @@ public class AutonomousTwo extends Command{
 	double encrightinch = 34.0308;
 	int armMove;
 	
-	
 	public AutonomousTwo(SpeedController leftCon, SpeedController rightCon, RobotDrive drive, Encoder leftEnc,
 			Encoder rightEnc, CANTalon manipulating)
 	{
@@ -50,7 +49,7 @@ public class AutonomousTwo extends Command{
 	    	manipulate.set(1);
 	    	armMove++;
 	    }
-	  //moves the robot backwards at 80% speed for 97 inches  
+	  //moves the robot backwards00 at 80% speed for 97 inches  
 		if(leftEncoder.get()< (encleftinch*97) && rightEncoder.get()< (encrightinch*97) && armMove>=15)
 		{
 			Brodin.tankDrive(.8, .8);
